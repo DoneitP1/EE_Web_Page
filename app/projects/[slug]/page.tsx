@@ -89,14 +89,14 @@ export default function ProjectDetail() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={`rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/10 dark:shadow-slate-900/50 border border-slate-200 dark:border-slate-800 ${index === 0 ? "md:col-span-2" : ""}`}
+                            className={`rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/10 dark:shadow-slate-900/50 border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 ${index === 0 ? "md:col-span-2" : ""}`}
                         >
                             <div className="relative aspect-video">
                                 <Image
                                     src={image}
                                     alt={`${project.title} screenshot ${index + 1}`}
                                     fill
-                                    className="object-cover hover:scale-105 transition-transform duration-500"
+                                    className="object-contain hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
                         </motion.div>

@@ -20,6 +20,7 @@ export function Navbar() {
         { name: content.nav.about, href: "#about" },
         { name: content.nav.projects, href: "#projects" },
         { name: content.nav.skills, href: "#skills" },
+        { name: content.nav.contact, href: "#contact" },
     ];
 
     if (!mounted) {
@@ -27,7 +28,7 @@ export function Navbar() {
     }
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F4F5EF]/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}

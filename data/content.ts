@@ -40,6 +40,29 @@ export type Content = {
             }[];
         }[];
     };
+    contactSection: {
+        title: string;
+        subtitle: string;
+        contactInfo: {
+            title: string;
+            emailLabel: string;
+            locationLabel: string;
+            email: string;
+            location: string;
+        };
+        form: {
+            title: string;
+            nameLabel: string;
+            emailLabel: string;
+            messageLabel: string;
+            buttonText: string;
+            placeholders: {
+                name: string;
+                email: string;
+                message: string;
+            };
+        };
+    };
     footer: {
         rights: string;
     };
@@ -91,7 +114,16 @@ export const content: Record<'en' | 'tr', Content> = {
                         problem: "Modern life is stressful, but building healthy habits feels like a chore. Users often struggle to find personalized, engaging wellness routines.",
                         solution: "WellNest gamifies wellness with a personalized, AI-driven platform. It combines mindfulness exercises, habit tracking, and mood analysis into a fluid, animated experience.",
                         architecture: "Built with React for a dynamic UI, Framer Motion for smooth, calming animations, and Material-UI for accessible component design. State management ensures seamless user progress tracking.",
-                        images: ["/wellnest.png"]
+                        images: [
+                            "/wellnest.png",
+                            "/wellnest/detail-1.png",
+                            "/wellnest/detail-2.png",
+                            "/wellnest/detail-3.png",
+                            "/wellnest/detail-4.png",
+                            "/wellnest/detail-5.png",
+                            "/wellnest/detail-6.png",
+                            "/wellnest/detail-7.png"
+                        ]
                     }
                 },
                 {
@@ -99,13 +131,13 @@ export const content: Record<'en' | 'tr', Content> = {
                     description: "Until today, simulation tools only showed you what you did. Neural Lap tells you what you need to do. Meet the world's first Bionic Racing Assistant for iRacing and ACC. A system that processes classic telemetry data with AI to draw 'Live AR Error Lines' on the track, monitors your heart rate to calm you down during stress, and generates strategies for you while you sleep. Drive not just faster; drive smarter. This is not an add-on, it's your unfair advantage.",
                     tech: ["Python", "Data Science", "React", "FastAPI"],
                     link: "https://github.com/DoneitP1/NeuralLap",
-                    image: "/neurallap.png",
+                    image: "/neurallap-white.png",
                     slug: "neurallap",
                     details: {
                         problem: "Sim racers drown in raw telemetry data without actionable insights. Understanding where to gain time requires expert knowledge that most drivers lack.",
                         solution: "NeuralLap acts as a Bionic Racing Assistant. It processes telemetry in real-time to overlay AR 'Error Lines' on the track and provides strategic advice, effectively coaching the driver.",
                         architecture: "The backend uses Python and FastAPI for high-performance data processing. FastF1 handles telemetry ingestion, while Machine Learning models analyze driving patterns. The frontend is a React dashboard visualizing complex data simply.",
-                        images: ["/neurallap.png"]
+                        images: ["/neurallap-white.png"]
                     }
                 },
                 {
@@ -190,6 +222,29 @@ export const content: Record<'en' | 'tr', Content> = {
                 }
             ]
         },
+        contactSection: {
+            title: "Get In Touch",
+            subtitle: "I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology!",
+            contactInfo: {
+                title: "Contact Information",
+                emailLabel: "Email",
+                locationLabel: "Location",
+                email: "info@emirhanerturk.com",
+                location: "Istanbul, Turkey"
+            },
+            form: {
+                title: "Send a Message",
+                nameLabel: "Name",
+                emailLabel: "Email",
+                messageLabel: "Message",
+                buttonText: "Send Message",
+                placeholders: {
+                    name: "Your Name",
+                    email: "your.email@example.com",
+                    message: "Your message..."
+                }
+            }
+        },
         footer: {
             rights: "All rights reserved."
         }
@@ -232,7 +287,16 @@ export const content: Record<'en' | 'tr', Content> = {
                         problem: "Modern hayat stresli, ancak sağlıklı alışkanlıklar edinmek zorlayıcı olabiliyor. Kullanıcılar genellikle kişiselleştirilmiş ve ilgi çekici sağlık rutinleri bulmakta zorlanıyor.",
                         solution: "WellNest, sağlığı kişiselleştirilmiş, yapay zeka destekli bir platformla oyunlaştırıyor. Farkındalık egzersizlerini, alışkanlık takibini ve ruh hali analizini akıcı, animasyonlu bir deneyimde birleştiriyor.",
                         architecture: "Dinamik bir kullanıcı arayüzü için React, pürüzsüz animasyonlar için Framer Motion ve erişilebilir bileşen tasarımı için Material-UI ile oluşturuldu.",
-                        images: ["/wellnest.png"]
+                        images: [
+                            "/wellnest.png",
+                            "/wellnest/detail-1.png",
+                            "/wellnest/detail-2.png",
+                            "/wellnest/detail-3.png",
+                            "/wellnest/detail-4.png",
+                            "/wellnest/detail-5.png",
+                            "/wellnest/detail-6.png",
+                            "/wellnest/detail-7.png"
+                        ]
                     }
                 },
                 {
@@ -240,13 +304,13 @@ export const content: Record<'en' | 'tr', Content> = {
                     description: "Bugüne kadar simülasyon araçları size sadece ne yaptığınızı gösterdi. Neural Lap ise size ne yapmanız gerektiğini söyler. iRacing ve ACC için geliştirilen dünyanın ilk Biyonik Yarış Asistanı ile tanışın. Klasik telemetri verilerini Yapay Zeka ile işleyerek pistin üzerine 'Canlı AR Hata Çizgileri' çizen, nabzınızı takip edip stres anında sizi sakinleştiren ve siz uyurken sizin yerinize strateji üreten bir sistem. Sadece daha hızlı değil; daha akıllı sürün. Bu bir eklenti değil, haksız avantajınız.",
                     tech: ["Python", "Data Science", "React", "FastAPI"],
                     link: "https://github.com/DoneitP1/NeuralLap",
-                    image: "/neurallap.png",
+                    image: "/neurallap-white.png",
                     slug: "neurallap",
                     details: {
                         problem: "Simülasyon yarışçıları işlenebilir içgörüler olmadan ham veri içinde boğuluyor. Zaman kazanılacak yerleri anlamak çoğu sürücüde olmayan uzmanlık bilgisi gerektiriyor.",
                         solution: "NeuralLap, Biyonik Yarış Asistanı olarak hareket eder. Telemetriyi gerçek zamanlı işleyerek pist üzerine AR 'Hata Çizgileri' çizer ve stratejik tavsiyeler verir.",
                         architecture: "Backend, yüksek performanslı veri işleme için Python ve FastAPI kullanır. FastF1 telemetri alımını yönetirken, Makine Öğrenimi modelleri sürüş modellerini analiz eder. Frontend, karmaşık verileri basitçe görselleştiren bir React panelidir.",
-                        images: ["/neurallap.png"]
+                        images: ["/neurallap-white.png"]
                     }
                 },
                 {
@@ -331,6 +395,29 @@ export const content: Record<'en' | 'tr', Content> = {
                     ]
                 }
             ]
+        },
+        contactSection: {
+            title: "İletişime Geç",
+            subtitle: "Yeni fırsatları, ilginç projeleri konuşmaya veya sadece teknoloji hakkında sohbet etmeye her zaman açığım!",
+            contactInfo: {
+                title: "İletişim Bilgileri",
+                emailLabel: "E-posta",
+                locationLabel: "Konum",
+                email: "info@emirhanerturk.com",
+                location: "İstanbul, Türkiye"
+            },
+            form: {
+                title: "Mesaj Gönder",
+                nameLabel: "İsim",
+                emailLabel: "E-posta",
+                messageLabel: "Mesaj",
+                buttonText: "Mesaj Gönder",
+                placeholders: {
+                    name: "İsminiz",
+                    email: "e-posta@ornek.com",
+                    message: "Mesajınız..."
+                }
+            }
         },
         footer: {
             rights: "Tüm hakları saklıdır."
