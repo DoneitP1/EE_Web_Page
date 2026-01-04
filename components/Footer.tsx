@@ -12,7 +12,7 @@ export function Footer() {
 
                 <div className="flex items-center gap-6 mb-8">
                     <a
-                        href="https://github.com"
+                        href="https://github.com/DoneitP1"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-3 bg-white dark:bg-slate-900 rounded-full shadow-sm hover:shadow-md text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white transition-all transform hover:-translate-y-1"
