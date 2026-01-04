@@ -80,26 +80,28 @@ export default function ProjectDetail() {
                     </div>
                 </motion.div>
 
-                {/* Main Image */}
-                {project.details.images[0] && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/10 dark:shadow-slate-900/50 mb-16 border border-slate-200 dark:border-slate-800"
-                    >
-                        <div className="relative aspect-video">
-                            <Image
-                                src={project.details.images[0]}
-                                alt={project.title}
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                        </div>
-                    </motion.div>
-                )}
-
+                {/* Gallery */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    {project.details.images.map((image, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className={`rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/10 dark:shadow-slate-900/50 border border-slate-200 dark:border-slate-800 ${index === 0 ? "md:col-span-2" : ""}`}
+                        >
+                            <div className="relative aspect-video">
+                                <Image
+                                    src={image}
+                                    alt={`${project.title} screenshot ${index + 1}`}
+                                    fill
+                                    className="object-cover hover:scale-105 transition-transform duration-500"
+                                />
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
                 {/* Case Study Content */}
                 <div className="grid gap-12 md:gap-16">
                     {/* Problem & Solution */}

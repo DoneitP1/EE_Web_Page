@@ -119,7 +119,29 @@ export const content: Record<'en' | 'tr', Content> = {
                         problem: "Finding the perfect lap time is difficult when data is scattered. Racers need a unified view of their sector times and theoretical bests.",
                         solution: "LapMaster aggregates timing data to calculate the theoretical best lap. It visualizes sector performance and highlights specific areas for improvement.",
                         architecture: "A Flask (Python) backend analyzes laptimes, while the React frontend presents interactive charts and comparison tools. Data is stored and retrieved efficiently to allow historical analysis.",
-                        images: ["/lapmaster.png"]
+                        images: [
+                            "/lapmaster-detail-3.png",
+                            "/lapmaster-detail-2.png",
+                            "/lapmaster-detail-1.png",
+                            "/lapmaster-detail-4.png",
+                            "/lapmaster-detail-5.png",
+                            "/lapmaster-detail-6.png",
+                            "/lapmaster-detail-7.png",
+                            "/lapmaster-detail-8.png",
+                            "/lapmaster-detail-9.png",
+                            "/lapmaster-detail-10.png",
+                            "/lapmaster-detail-11.png",
+                            "/lapmaster-detail-12.png",
+                            "/lapmaster-detail-13.png",
+                            "/lapmaster-detail-14.png",
+                            "/lapmaster-detail-15.png",
+                            "/lapmaster-detail-16.png",
+                            "/lapmaster-detail-17.png",
+                            "/lapmaster-detail-18.png",
+                            "/lapmaster-detail-19.png",
+                            "/lapmaster-detail-20.png",
+                            "/lapmaster-detail-21.png"
+                        ]
                     }
                 }
             ]
@@ -239,7 +261,29 @@ export const content: Record<'en' | 'tr', Content> = {
                         problem: "Veriler dağınık olduğunda mükemmel tur zamanını bulmak zordur. Yarışçıların sektör zamanlarına ve teorik en iyi derecelerine toplu bir bakışa ihtiyacı vardır.",
                         solution: "LapMaster, teorik en iyi turu hesaplamak için zamanlama verilerini toplar. Sektör performansını görselleştirir ve gelişim alanlarını vurgular.",
                         architecture: "Flask (Python) backend tur zamanlarını analiz ederken, React frontend etkileşimli grafikler sunar. Veriler, geçmiş analizine izin vermek için verimli bir şekilde saklanır.",
-                        images: ["/lapmaster.png"]
+                        images: [
+                            "/lapmaster-detail-3.png",
+                            "/lapmaster-detail-2.png",
+                            "/lapmaster-detail-1.png",
+                            "/lapmaster-detail-4.png",
+                            "/lapmaster-detail-5.png",
+                            "/lapmaster-detail-6.png",
+                            "/lapmaster-detail-7.png",
+                            "/lapmaster-detail-8.png",
+                            "/lapmaster-detail-9.png",
+                            "/lapmaster-detail-10.png",
+                            "/lapmaster-detail-11.png",
+                            "/lapmaster-detail-12.png",
+                            "/lapmaster-detail-13.png",
+                            "/lapmaster-detail-14.png",
+                            "/lapmaster-detail-15.png",
+                            "/lapmaster-detail-16.png",
+                            "/lapmaster-detail-17.png",
+                            "/lapmaster-detail-18.png",
+                            "/lapmaster-detail-19.png",
+                            "/lapmaster-detail-20.png",
+                            "/lapmaster-detail-21.png"
+                        ]
                     }
                 }
             ]
