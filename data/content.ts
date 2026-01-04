@@ -137,7 +137,17 @@ export const content: Record<'en' | 'tr', Content> = {
                         problem: "Sim racers drown in raw telemetry data without actionable insights. Understanding where to gain time requires expert knowledge that most drivers lack.",
                         solution: "NeuralLap acts as a Bionic Racing Assistant. It processes telemetry in real-time to overlay AR 'Error Lines' on the track and provides strategic advice, effectively coaching the driver.",
                         architecture: "The backend uses Python and FastAPI for high-performance data processing. FastF1 handles telemetry ingestion, while Machine Learning models analyze driving patterns. The frontend is a React dashboard visualizing complex data simply.",
-                        images: ["/neurallap-white.png"]
+                        images: [
+                            "/neurallap-white.png",
+                            "/neurallap/detail-1.png",
+                            "/neurallap/detail-2.png",
+                            "/neurallap/detail-3.png",
+                            "/neurallap/detail-4.png",
+                            "/neurallap/detail-5.png",
+                            "/neurallap/detail-6.png",
+                            "/neurallap/detail-7.png",
+                            "/neurallap/detail-8.png"
+                        ]
                     }
                 },
                 {
@@ -310,7 +320,17 @@ export const content: Record<'en' | 'tr', Content> = {
                         problem: "Simülasyon yarışçıları işlenebilir içgörüler olmadan ham veri içinde boğuluyor. Zaman kazanılacak yerleri anlamak çoğu sürücüde olmayan uzmanlık bilgisi gerektiriyor.",
                         solution: "NeuralLap, Biyonik Yarış Asistanı olarak hareket eder. Telemetriyi gerçek zamanlı işleyerek pist üzerine AR 'Hata Çizgileri' çizer ve stratejik tavsiyeler verir.",
                         architecture: "Backend, yüksek performanslı veri işleme için Python ve FastAPI kullanır. FastF1 telemetri alımını yönetirken, Makine Öğrenimi modelleri sürüş modellerini analiz eder. Frontend, karmaşık verileri basitçe görselleştiren bir React panelidir.",
-                        images: ["/neurallap-white.png"]
+                        images: [
+                            "/neurallap-white.png",
+                            "/neurallap/detail-1.png",
+                            "/neurallap/detail-2.png",
+                            "/neurallap/detail-3.png",
+                            "/neurallap/detail-4.png",
+                            "/neurallap/detail-5.png",
+                            "/neurallap/detail-6.png",
+                            "/neurallap/detail-7.png",
+                            "/neurallap/detail-8.png"
+                        ]
                     }
                 },
                 {
