@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Moon, Sun, Globe, Menu, X } from "lucide-react";
+import { Moon, Sun, Globe, Menu, X, Download } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "@/context/LanguageContext";
 import Image from "next/image";
@@ -56,6 +56,15 @@ export function Navbar() {
                         ))}
 
                         <div className="flex items-center space-x-4 border-l border-slate-200 dark:border-slate-800 pl-4">
+                            <a
+                                href="/cv.png"
+                                download="Emirhan_Erturk_CV.png"
+                                className="hidden lg:flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-full transition-colors"
+                            >
+                                <Download className="w-4 h-4" />
+                                {content.nav.downloadCv}
+                            </a>
+
                             {/* Language Toggle */}
                             <button
                                 onClick={toggleLanguage}
@@ -125,6 +134,14 @@ export function Navbar() {
                                 {link.name}
                             </a>
                         ))}
+                        <a
+                            href="/cv.png"
+                            download="Emirhan_Erturk_CV.png"
+                            className="flex items-center gap-2 px-3 py-2 text-base font-medium text-blue-600 dark:text-cyan-400"
+                        >
+                            <Download className="w-5 h-5" />
+                            {content.nav.downloadCv}
+                        </a>
                     </div>
                 </div>
             )}

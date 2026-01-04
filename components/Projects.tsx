@@ -4,6 +4,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Code2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Projects() {
     const { content } = useLanguage();
@@ -69,15 +70,24 @@ export function Projects() {
                                         ))}
                                     </div>
 
-                                    <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex gap-4">
-                                        <a href="#" className="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">
+                                    <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                                        <a
+                                            href={project.link || "#"}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors"
+                                        >
                                             <Github className="w-4 h-4 mr-2" />
                                             Code
                                         </a>
-                                        <a href="#" className="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">
-                                            <ExternalLink className="w-4 h-4 mr-2" />
-                                            Live Demo
-                                        </a>
+
+                                        <Link
+                                            href={`/projects/${project.slug}`}
+                                            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-medium rounded-lg hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors"
+                                        >
+                                            View Details
+                                            <ExternalLink className="w-4 h-4" />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
