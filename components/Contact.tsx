@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Github, Linkedin, Send } from "lucide-react";
@@ -7,6 +8,38 @@ import { Mail, MapPin, Github, Linkedin, Send } from "lucide-react";
 export const Contact = () => {
     const { content } = useLanguage();
     const { contactSection } = content;
+    const [formState, setFormState] = useState<{
+        status: 'idle' | 'submitting' | 'success' | 'error';
+        message: string;
+    }>({ status: 'idle', message: '' });
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setFormState({ status: 'submitting', message: '' });
+
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('https://formspree.io/f/xgovddpz', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                setFormState({ status: 'success', message: 'Message sent successfully!' });
+                (e.target as HTMLFormElement).reset();
+            } else {
+                setFormState({ status: 'error', message: 'Failed to send message. Please try again.' });
+            }
+        } catch (error) {
+            setFormState({ status: 'error', message: 'An error occurred. Please try again.' });
+        }
+    };
 
     return (
         <section id="contact" className="py-20 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
@@ -110,7 +143,7 @@ export const Contact = () => {
                             {contactSection.form.title}
                         </h3>
 
-                        <form className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                                     {contactSection.form.nameLabel}
@@ -118,6 +151,8 @@ export const Contact = () => {
                                 <input
                                     type="text"
                                     id="name"
+                                    name="name"
+                                    required
                                     className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                                     placeholder={contactSection.form.placeholders.name}
                                 />
@@ -130,6 +165,8 @@ export const Contact = () => {
                                 <input
                                     type="email"
                                     id="email"
+                                    name="email"
+                                    required
                                     className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                                     placeholder={contactSection.form.placeholders.email}
                                 />
@@ -141,7 +178,9 @@ export const Contact = () => {
                                 </label>
                                 <textarea
                                     id="message"
+                                    name="message"
                                     rows={4}
+                                    required
                                     className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none resize-none"
                                     placeholder={contactSection.form.placeholders.message}
                                 />
@@ -149,11 +188,38 @@ export const Contact = () => {
 
                             <button
                                 type="submit"
-                                className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                                disabled={formState.status === 'submitting'}
+                                className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                <Send className="w-5 h-5" />
-                                {contactSection.form.buttonText}
+                                {formState.status === 'submitting' ? (
+                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                ) : (
+                                    <>
+                                        <Send className="w-5 h-5" />
+                                        {contactSection.form.buttonText}
+                                    </>
+                                )}
                             </button>
+
+                            {formState.status === 'success' && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="p-4 bg-green-500/10 text-green-500 rounded-xl text-center font-medium"
+                                >
+                                    {formState.message}
+                                </motion.div>
+                            )}
+
+                            {formState.status === 'error' && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="p-4 bg-red-500/10 text-red-500 rounded-xl text-center font-medium"
+                                >
+                                    {formState.message}
+                                </motion.div>
+                            )}
                         </form>
                     </motion.div>
                 </div>
