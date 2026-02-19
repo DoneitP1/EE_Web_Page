@@ -2,41 +2,55 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
-import { User } from "lucide-react";
 
 export function About() {
     const { content } = useLanguage();
 
     return (
-        <section id="about" className="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="about" className="py-32 bg-[var(--glacier-whisper)] relative">
+            <div className="max-w-7xl mx-auto px-6 md:px-12">
+                {/* Section header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-12"
+                    className="mb-20"
                 >
-                    <div className="inline-flex items-center justify-center p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
-                        <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+                    <div className="line-accent mb-6" />
+                    <span className="text-base font-sans font-semibold text-[var(--lagoon-mist)] tracking-widest uppercase mb-4 block">
+                        {content.about.title}
+                    </span>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--storm-slate)] tracking-tight">
                         {content.about.title}
                     </h2>
                 </motion.div>
 
-                <div className="space-y-6 text-lg text-slate-600 dark:text-slate-300 leading-relaxed text-center md:text-left">
-                    {content.about.description.map((paragraph, index) => (
-                        <motion.p
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                        >
-                            {paragraph}
-                        </motion.p>
-                    ))}
+                {/* Asymmetric layout */}
+                <div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="space-y-0"
+                    >
+                        {content.about.description.map((paragraph, index) => (
+                            <div key={index}>
+                                {index > 0 && (
+                                    <div className="w-full h-px bg-[var(--storm-slate)]/10 my-10" />
+                                )}
+                                <div className="flex gap-6 items-start">
+                                    <span className="text-base font-mono text-[var(--lagoon-mist)] tracking-wider mt-1.5 flex-shrink-0">
+                                        0{index + 1}
+                                    </span>
+                                    <p className="text-lg md:text-xl text-[var(--storm-slate)]/80 leading-relaxed">
+                                        {paragraph}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </motion.div>
                 </div>
             </div>
         </section>

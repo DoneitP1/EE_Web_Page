@@ -8,6 +8,14 @@ export type Content = {
         description: string;
         ctaPrimary: string;
         ctaSecondary: string;
+        marquee: {
+            line1: string;
+            line2: string;
+        };
+        widgets: {
+            status: string;
+            location: string;
+        };
     };
     about: {
         title: string;
@@ -90,7 +98,15 @@ export const content: Record<'en' | 'tr', Content> = {
             subtitle: "Computer Science Student",
             description: "I focus on Data Science, Python, and Full Stack Development. Building modern web solutions with a clean aesthetic.",
             ctaPrimary: "View Projects",
-            ctaSecondary: "About Me"
+            ctaSecondary: "About Me",
+            marquee: {
+                line1: "SOFTWARE ENGINEER • FULL STACK DEVELOPER • CREATIVE DESIGNER •",
+                line2: "REACT • NEXT.JS • TYPESCRIPT • NODE.JS • TAILWIND •"
+            },
+            widgets: {
+                status: "Available for work",
+                location: "Istanbul, TR"
+            }
         },
         about: {
             title: "About Me",
@@ -131,14 +147,14 @@ export const content: Record<'en' | 'tr', Content> = {
                     description: "Until today, simulation tools only showed you what you did. Neural Lap tells you what you need to do. Meet the world's first Bionic Racing Assistant for iRacing and ACC. A system that processes classic telemetry data with AI to draw 'Live AR Error Lines' on the track, monitors your heart rate to calm you down during stress, and generates strategies for you while you sleep. Drive not just faster; drive smarter. This is not an add-on, it's your unfair advantage.",
                     tech: ["Python", "Data Science", "React", "FastAPI"],
                     link: "https://github.com/DoneitP1/NeuralLap",
-                    image: "/neurallap-white.png",
+                    image: "/neurallap.png",
                     slug: "neurallap",
                     details: {
                         problem: "Sim racers drown in raw telemetry data without actionable insights. Understanding where to gain time requires expert knowledge that most drivers lack.",
                         solution: "NeuralLap acts as a Bionic Racing Assistant. It processes telemetry in real-time to overlay AR 'Error Lines' on the track and provides strategic advice, effectively coaching the driver.",
                         architecture: "The backend uses Python and FastAPI for high-performance data processing. FastF1 handles telemetry ingestion, while Machine Learning models analyze driving patterns. The frontend is a React dashboard visualizing complex data simply.",
                         images: [
-                            "/neurallap-white.png",
+                            "/neurallap.png",
                             "/neurallap/detail-1.png",
                             "/neurallap/detail-2.png",
                             "/neurallap/detail-3.png",
@@ -183,6 +199,28 @@ export const content: Record<'en' | 'tr', Content> = {
                             "/lapmaster-detail-19.png",
                             "/lapmaster-detail-20.png",
                             "/lapmaster-detail-21.png"
+                        ]
+                    }
+                },
+                {
+                    title: "Joey Organizasyon",
+                    description: "A modern event and birthday organization company website featuring interactive cursor particles, smooth GSAP animations, a services showcase, photo gallery, and pricing packages.",
+                    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP", "Framer Motion"],
+                    link: "https://joeyorganizasyon.net",
+                    image: "/joey-organizasyon.png",
+                    slug: "joey-organizasyon",
+                    details: {
+                        problem: "Event organization companies often lack a digital presence that reflects the joyful, vibrant nature of their services. Generic templates fail to convey the energy and creativity behind every celebration.",
+                        solution: "Built a custom animated website with interactive cursor particles, smooth scroll-driven animations using GSAP and Framer Motion, a visual gallery showcase, and clear service packages — all reflecting the brand's playful identity.",
+                        architecture: "Next.js 16 with React 19 provides the foundation. GSAP powers complex timeline animations while Framer Motion handles component transitions. Tailwind CSS 4 enables rapid, responsive styling. Dynamic imports prevent SSR issues with canvas-based cursor effects.",
+                        images: [
+                            "/joey-detail-1.png",
+                            "/joey-detail-2.png",
+                            "/joey-detail-3.png",
+                            "/joey-detail-4.png",
+                            "/joey-detail-5.png",
+                            "/joey-detail-6.png",
+                            "/joey-detail-7.png"
                         ]
                     }
                 }
@@ -273,7 +311,15 @@ export const content: Record<'en' | 'tr', Content> = {
             subtitle: "Bilgisayar Mühendisliği Öğrencisi",
             description: "Veri Bilimi, Python ve Full Stack Geliştirme üzerine odaklanıyorum. Temiz bir estetikle modern web çözümleri üretiyorum.",
             ctaPrimary: "Projeleri Gör",
-            ctaSecondary: "Hakkımda"
+            ctaSecondary: "Hakkımda",
+            marquee: {
+                line1: "YAZILIM MÜHENDİSİ • FULL STACK GELİŞTİRİCİ • YARATICI TASARIMCI •",
+                line2: "REACT • NEXT.JS • TYPESCRIPT • NODE.JS • TAILWIND •"
+            },
+            widgets: {
+                status: "Yeni Projelere Açık",
+                location: "İstanbul, TR"
+            }
         },
         about: {
             title: "Hakkımda",
@@ -314,14 +360,14 @@ export const content: Record<'en' | 'tr', Content> = {
                     description: "Bugüne kadar simülasyon araçları size sadece ne yaptığınızı gösterdi. Neural Lap ise size ne yapmanız gerektiğini söyler. iRacing ve ACC için geliştirilen dünyanın ilk Biyonik Yarış Asistanı ile tanışın. Klasik telemetri verilerini Yapay Zeka ile işleyerek pistin üzerine 'Canlı AR Hata Çizgileri' çizen, nabzınızı takip edip stres anında sizi sakinleştiren ve siz uyurken sizin yerinize strateji üreten bir sistem. Sadece daha hızlı değil; daha akıllı sürün. Bu bir eklenti değil, haksız avantajınız.",
                     tech: ["Python", "Data Science", "React", "FastAPI"],
                     link: "https://github.com/DoneitP1/NeuralLap",
-                    image: "/neurallap-white.png",
+                    image: "/neurallap.png",
                     slug: "neurallap",
                     details: {
                         problem: "Simülasyon yarışçıları işlenebilir içgörüler olmadan ham veri içinde boğuluyor. Zaman kazanılacak yerleri anlamak çoğu sürücüde olmayan uzmanlık bilgisi gerektiriyor.",
                         solution: "NeuralLap, Biyonik Yarış Asistanı olarak hareket eder. Telemetriyi gerçek zamanlı işleyerek pist üzerine AR 'Hata Çizgileri' çizer ve stratejik tavsiyeler verir.",
                         architecture: "Backend, yüksek performanslı veri işleme için Python ve FastAPI kullanır. FastF1 telemetri alımını yönetirken, Makine Öğrenimi modelleri sürüş modellerini analiz eder. Frontend, karmaşık verileri basitçe görselleştiren bir React panelidir.",
                         images: [
-                            "/neurallap-white.png",
+                            "/neurallap.png",
                             "/neurallap/detail-1.png",
                             "/neurallap/detail-2.png",
                             "/neurallap/detail-3.png",
@@ -367,6 +413,28 @@ export const content: Record<'en' | 'tr', Content> = {
                             "/lapmaster-detail-19.png",
                             "/lapmaster-detail-20.png",
                             "/lapmaster-detail-21.png"
+                        ]
+                    }
+                },
+                {
+                    title: "Joey Organizasyon",
+                    description: "İnteraktif imleç partikülleri, akıcı GSAP animasyonları, hizmet vitrini, fotoğraf galerisi ve fiyat paketleri içeren modern bir etkinlik ve doğum günü organizasyon şirketi web sitesi.",
+                    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP", "Framer Motion"],
+                    link: "https://joeyorganizasyon.net",
+                    image: "/joey-organizasyon.png",
+                    slug: "joey-organizasyon",
+                    details: {
+                        problem: "Etkinlik organizasyon şirketleri genellikle hizmetlerinin neşeli, canlı doğasını yansıtan bir dijital varlıktan yoksundur. Genel şablonlar, her kutlamanın arkasındaki enerji ve yaratıcılığı aktarmada yetersiz kalır.",
+                        solution: "GSAP ve Framer Motion ile akıcı kaydırma animasyonları, interaktif imleç partikülleri, görsel galeri ve net hizmet paketleri içeren özel animasyonlu bir web sitesi geliştirildi — tamamı markanın eğlenceli kimliğini yansıtıyor.",
+                        architecture: "Next.js 16 ve React 19 temel altyapıyı sağlar. GSAP karmaşık zaman çizelgesi animasyonlarını yönetirken, Framer Motion bileşen geçişlerini yönetir. Tailwind CSS 4 hızlı, duyarlı stil sağlar. Canvas tabanlı imleç efektlerinde SSR sorunlarını önlemek için dinamik içe aktarma kullanılır.",
+                        images: [
+                            "/joey-detail-1.png",
+                            "/joey-detail-2.png",
+                            "/joey-detail-3.png",
+                            "/joey-detail-4.png",
+                            "/joey-detail-5.png",
+                            "/joey-detail-6.png",
+                            "/joey-detail-7.png"
                         ]
                     }
                 }

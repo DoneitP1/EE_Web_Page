@@ -1,100 +1,174 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { motion } from "framer-motion";
-import { ExternalLink, Github, Code2 } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Github, Globe, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 
 export function Projects() {
     const { content } = useLanguage();
 
     return (
-        <section id="projects" className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="projects" className="py-32 bg-[var(--glacier-whisper)] relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute top-[20%] left-0 w-[500px] h-[500px] bg-[var(--lagoon-mist)]/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[20%] right-0 w-[500px] h-[500px] bg-[var(--lagoon-mist)]/5 rounded-full blur-[120px] pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto px-6 md:px-12">
+                {/* Section header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-16"
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6 }}
+                    className="mb-32 md:pl-12"
                 >
-                    <div className="inline-flex items-center justify-center p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-4">
-                        <Code2 className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+                    <div className="line-accent mb-6" />
+                    <span className="text-base font-sans font-semibold text-[var(--lagoon-mist)] tracking-widest uppercase mb-4 block">
                         {content.projects.title}
+                    </span>
+                    <h2 className="text-5xl md:text-7xl font-bold text-[var(--storm-slate)] tracking-tight">
+                        Selected<br /><span className="text-[var(--storm-slate)]/30">Works</span>
                     </h2>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Alternating project blocks */}
+                <div className="space-y-40">
                     {content.projects.items.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl transition-shadow duration-300 flex flex-col"
-                        >
-                            <div className="h-48 bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-900 dark:to-indigo-900 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-                                {project.image ? (
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                ) : (
-                                    <span className="text-4xl font-bold text-white opacity-25">{project.title.charAt(0)}</span>
-                                )}
-                            </div>
-
-                            <div className="p-6 flex-1 flex flex-col">
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-                                    {project.title}
-                                </h3>
-                                <p className="text-slate-600 dark:text-slate-400 mb-6 flex-1">
-                                    {project.description}
-                                </p>
-
-                                <div className="space-y-4">
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.tech.map((tech) => (
-                                            <span
-                                                key={tech}
-                                                className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                                        <a
-                                            href={project.link || "#"}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors"
-                                        >
-                                            <Github className="w-4 h-4 mr-2" />
-                                            Code
-                                        </a>
-
-                                        <Link
-                                            href={`/projects/${project.slug}`}
-                                            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-medium rounded-lg hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors"
-                                        >
-                                            View Details
-                                            <ExternalLink className="w-4 h-4" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
+                        <ProjectItem key={index} project={project} index={index} />
                     ))}
                 </div>
             </div>
         </section>
+    );
+}
+
+function ProjectItem({ project, index }: { project: any, index: number }) {
+    const isEven = index % 2 === 0;
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start end", "end start"]
+    });
+
+    const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0]);
+
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-24 items-center`}
+        >
+            {/* Image Side */}
+            <div className="w-full lg:w-3/5 group">
+                <Link href={`/projects/${project.slug}`} className="block relative">
+                    <div className="relative aspect-[16/9] overflow-hidden bg-white/60 rounded-sm shadow-md glow-hover">
+                        {/* Image Reveal Mask */}
+                        <motion.div
+                            initial={{ scale: 1.1 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, ease: "circOut" }}
+                            className="absolute inset-0 w-full h-full"
+                        >
+                            {project.image ? (
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 55vw, 45vw"
+                                    loading="lazy"
+                                    quality={80}
+                                />
+                            ) : (
+                                <div className="flex items-center justify-center h-full">
+                                    <span className="text-8xl font-black text-[var(--storm-slate)]/5">
+                                        {project.title.charAt(0)}
+                                    </span>
+                                </div>
+                            )}
+                        </motion.div>
+
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-[var(--arctic-glow)]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                        {/* Custom Cursor/Button for Hover */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
+                            <span className="w-24 h-24 rounded-full bg-[var(--arctic-glow)] flex items-center justify-center shadow-lg">
+                                <ArrowUpRight className="w-8 h-8 text-white" />
+                            </span>
+                        </div>
+                    </div>
+                </Link>
+            </div>
+
+            {/* Content Side */}
+            <div className="w-full lg:w-2/5 flex flex-col justify-center">
+                <div className="flex items-baseline gap-4 mb-6">
+                    <span className="text-sm font-mono text-[var(--lagoon-mist)] tracking-widest">
+                        0{index + 1}
+                    </span>
+                    <div className="h-px bg-[var(--lagoon-mist)]/30 w-12" />
+                </div>
+
+                <Link
+                    href={`/projects/${project.slug}`}
+                    className="block group/title"
+                >
+                    <h3 className="text-3xl md:text-5xl font-bold text-[var(--storm-slate)] mb-6 group-hover/title:text-[var(--lagoon-mist)] transition-colors duration-300">
+                        {project.title}
+                    </h3>
+                </Link>
+
+                <p className="text-base md:text-lg text-[var(--storm-slate)]/70 leading-relaxed mb-8">
+                    {project.description}
+                </p>
+
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-2 mb-10">
+                    {project.tech.map((tech: string) => (
+                        <span
+                            key={tech}
+                            className="px-3 py-1 bg-white/50 border border-[var(--storm-slate)]/15 text-xs text-[var(--storm-slate)] font-mono uppercase tracking-wider rounded-sm"
+                        >
+                            {tech}
+                        </span>
+                    ))}
+                </div>
+
+                {/* Links */}
+                <div className="flex items-center gap-6">
+                    <Link
+                        href={`/projects/${project.slug}`}
+                        className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[var(--storm-slate)] hover:text-[var(--lagoon-mist)] transition-colors group/link"
+                    >
+                        View Project
+                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
+                    </Link>
+
+                    {project.link && (
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[var(--storm-slate)]/40 hover:text-[var(--storm-slate)] transition-colors"
+                        >
+                            {project.link.includes("github.com") ? (
+                                <><Github className="w-4 h-4" />Source</>
+                            ) : (
+                                <><Globe className="w-4 h-4" />Website</>
+                            )}
+                        </a>
+                    )}
+                </div>
+            </div>
+        </motion.div>
     );
 }

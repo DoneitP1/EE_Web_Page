@@ -4,16 +4,20 @@ import { useState, useEffect } from "react";
 import { Moon, Sun, Globe, Menu, X, Download } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "@/context/LanguageContext";
-import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
     const { language, toggleLanguage, content } = useLanguage();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         setMounted(true);
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     const navLinks = [
@@ -28,88 +32,79 @@ export function Navbar() {
     }
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F4F5EF]/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
+        <nav
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+                    ? "bg-[rgba(255,248,240,0.9)] backdrop-blur-xl border-b border-[rgba(93,115,126,0.1)] py-4"
+                    : "bg-transparent py-6"
+                }`}
+        >
+            <div className="max-w-7xl mx-auto px-6 md:px-12">
+                <div className="flex items-center justify-between">
                     {/* Logo */}
-                    <div className="flex-shrink-0 flex items-center">
-                        <div className="relative w-10 h-10 md:w-12 md:h-12">
-                            <Image
-                                src="/logo.png"
-                                alt="EE Logo"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                        </div>
-                    </div>
+                    <a href="#" className="flex-shrink-0 flex items-center gap-2 group">
+                        <span className="font-sans text-xl font-bold text-[var(--storm-slate)] tracking-tight">
+                            Emirhan Ertürk
+                        </span>
+                    </a>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden md:flex items-center gap-8">
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
                                 href={link.href}
-                                className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors"
+                                className="relative text-base font-medium text-[var(--storm-slate)]/70 hover:text-[var(--storm-slate)] transition-colors duration-200 group"
                             >
                                 {link.name}
+                                <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--lagoon-mist)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
                             </a>
                         ))}
+                    </div>
 
-                        <div className="flex items-center space-x-4 border-l border-slate-200 dark:border-slate-800 pl-4">
-                            <a
-                                href="/cv.png"
-                                download="Emirhan_Erturk_CV.png"
-                                className="hidden lg:flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-full transition-colors"
-                            >
-                                <Download className="w-4 h-4" />
-                                {content.nav.downloadCv}
-                            </a>
+                    {/* Right side controls */}
+                    <div className="hidden md:flex items-center gap-6">
+                        <a
+                            href="/cv.png"
+                            download="Emirhan_Erturk_CV.png"
+                            className="btn-primary flex items-center gap-2 py-2 px-6 text-sm"
+                        >
+                            <Download className="w-4 h-4" />
+                            {content.nav.downloadCv}
+                        </a>
 
-                            {/* Language Toggle */}
-                            <button
-                                onClick={toggleLanguage}
-                                className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors flex items-center gap-1"
-                                aria-label="Toggle Language"
-                            >
-                                <Globe className="w-4 h-4" />
-                                <span className="text-xs font-bold">{language.toUpperCase()}</span>
-                            </button>
+                        <div className="w-px h-6 bg-[var(--storm-slate)]/20" />
 
-                            {/* Theme Toggle */}
-                            <button
-                                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
-                                aria-label="Toggle Theme"
-                            >
-                                {theme === "dark" ? (
-                                    <Sun className="w-5 h-5 text-yellow-500" />
-                                ) : (
-                                    <Moon className="w-5 h-5 text-indigo-600" />
-                                )}
-                            </button>
-                        </div>
+                        {/* Language Toggle */}
+                        <button
+                            onClick={toggleLanguage}
+                            className="flex items-center gap-1 text-[var(--storm-slate)]/70 hover:text-[var(--lagoon-mist)] transition-colors text-sm font-medium uppercase"
+                            aria-label="Toggle Language"
+                        >
+                            <Globe className="w-4 h-4" />
+                            {language.toUpperCase()}
+                        </button>
+
+                        {/* Theme Toggle - Hidden/Disabled if we force light mode, but keeping structure for now */}
+                        {/* 
+                        <button
+                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                            className="p-2 text-neutral-400 hover:text-[#c8ff00] transition-colors"
+                        >... </button> 
+                        */}
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="md:hidden flex items-center gap-2">
+                    <div className="md:hidden flex items-center gap-4">
                         <button
                             onClick={toggleLanguage}
-                            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors flex items-center gap-1"
+                            className="text-[var(--storm-slate)] font-medium"
                         >
-                            <span className="text-xs font-bold">{language.toUpperCase()}</span>
-                        </button>
-
-                        <button
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
-                        >
-                            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                            {language.toUpperCase()}
                         </button>
 
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="p-2 rounded-md text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
+                            className="p-2 text-[var(--storm-slate)] hover:text-[var(--lagoon-mist)] transition-colors"
                         >
                             {isMobileMenuOpen ? (
                                 <X className="w-6 h-6" />
@@ -121,31 +116,46 @@ export function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <div className="md:hidden bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:bg-slate-50 dark:hover:bg-slate-900"
+            {/* Mobile Menu - Full screen overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="md:hidden fixed inset-0 top-[70px] bg-[var(--glacier-whisper)] z-40"
+                    >
+                        <div className="flex flex-col items-center justify-center h-full gap-8 pb-20">
+                            {navLinks.map((link, i) => (
+                                <motion.a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 10 }}
+                                    transition={{ duration: 0.3, delay: i * 0.08 }}
+                                    className="text-2xl font-bold text-[var(--storm-slate)] hover:text-[var(--lagoon-mist)] transition-colors"
+                                >
+                                    {link.name}
+                                </motion.a>
+                            ))}
+                            <motion.a
+                                href="/cv.png"
+                                download="Emirhan_Erturk_CV.png"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 10 }}
+                                transition={{ duration: 0.3, delay: navLinks.length * 0.08 }}
+                                className="btn-primary mt-6"
                             >
-                                {link.name}
-                            </a>
-                        ))}
-                        <a
-                            href="/cv.png"
-                            download="Emirhan_Erturk_CV.png"
-                            className="flex items-center gap-2 px-3 py-2 text-base font-medium text-blue-600 dark:text-cyan-400"
-                        >
-                            <Download className="w-5 h-5" />
-                            {content.nav.downloadCv}
-                        </a>
-                    </div>
-                </div>
-            )}
+                                {content.nav.downloadCv}
+                            </motion.a>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 }
